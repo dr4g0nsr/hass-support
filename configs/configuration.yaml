@@ -5,28 +5,8 @@ default_config:
 frontend:
   themes: !include_dir_merge_named themes
 
-lovelace:
-  mode: yaml
-  resources:
-    - url: /local/clock-weather-card.js
-      type: module
-    - url: /local/sticky_note_card.js
-      type: module
-    - url: /local/sidebar-card.js
-      type: module
-
-#resources:
-  # You'll need to update the version number at the end of the url after every update.
-#  - url: /local/kiosk-mode.js?v=1.2.1
-#    type: module
-#  - url: /hacsfiles/ha-biofects-fullmenu/ha-biofects-fullmenu.js
-#    type: module
-
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 
-input_text:
-  sticky_note:
-    name: Sticky Note
-    max: 255
+lovelace: !include configs/configuration-partial.yaml
