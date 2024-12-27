@@ -6,3 +6,5 @@ resources:
     type: module
   - url: /local/sidebar-card.js
     type: module
+  - url: /local/floorplan.js
+    type: module
