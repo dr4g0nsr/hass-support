@@ -10,3 +10,4 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 
 lovelace: !include configs/configuration-partial.yaml
+animated_background: !include configs/configuration-animated.yaml
