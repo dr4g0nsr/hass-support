@@ -8,3 +8,5 @@ resources:
     type: module
   - url: /local/cards/floorplan.js
     type: module
+  - url: /local/cards/animated-background.js
+    type: module

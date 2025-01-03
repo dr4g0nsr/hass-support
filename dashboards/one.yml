@@ -61,16 +61,12 @@ sidebar:
   hideHassSidebar: false
   sidebarMenu:
     - action: navigate
-      navigation_path: /dashboard-home
+      navigation_path: /dashboard-tablet
       name: Home
       active: true
     - action: navigate
-      navigation_path: /dashboard-climate
-      name: Climate
-      active: true
-    - action: navigate
-      navigation_path: /dashboard-irrigation
-      name: Irrigation
+      navigation_path: /dashboard-cameras
+      name: Cameras
       active: true
     - action: navigate
       navigation_path: /dashboard-lights
@@ -81,12 +77,12 @@ sidebar:
       name: Security
       active: true
     - action: navigate
-      navigation_path: /profile/general
-      name: Profile
+      navigation_path: /dashboard-floorplan
+      name: Floorplan
       active: true
     - action: navigate
-      navigation_path: /calendar
-      name: Calendar
+      navigation_path: /dashboard-temperatures
+      name: Temparatures
       active: true
 views:
   - title: Home
