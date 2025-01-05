@@ -147,7 +147,7 @@ tablet:
 
   card-mod-root: |
     #view {
-      background: url('/local/background.png') !important;
+      background: url('/local/theme-images/background.png') !important;
       background-size: cover !important;
     }
 

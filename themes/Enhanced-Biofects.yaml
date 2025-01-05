@@ -10,7 +10,7 @@ Enhanced-Biofects:
   header-height: 40px
 
   ### Main Interface Colors ###
-  lovelace-background: 'center / cover no-repeat url("/local/backgrounds/enhanced-biofects.png") fixed'
+  lovelace-background: 'center / cover no-repeat url("/local/theme-images/enhanced-biofects.png") fixed'
   app-header-background-color: "rgba(0, 15, 30, 0.7)"
   card-background-color: "rgba(0, 15, 30, 0.7)"
   primary-color: "#00FFFF"  # Bright Turquoise
