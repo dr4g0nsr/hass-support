@@ -5,7 +5,7 @@ yourname:
   ### Header Height ###
   header-height: 40px
   ### Main Interface Colors ###
-  lovelace-background: 'center / cover no-repeat url("/local/theme-images/yourname.jpg") fixed'
+  lovelace-background: 'center / cover no-repeat url("/local/backgrounds/yourname.jpg") fixed'
   app-header-background-color: "#141A32"
   card-background-color: "rgba(0, 0, 0, 0.5)"
   primary-color: "#007AFF"
