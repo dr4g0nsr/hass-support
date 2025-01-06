@@ -59,7 +59,7 @@ function getVars() {
   Root = Root && Root.querySelector("home-assistant-main");
   Root = Root && Root.shadowRoot;
   Root = Root && Root.querySelector("app-drawer-layout partial-panel-resolver, ha-drawer partial-panel-resolver");
-  
+
   Root = (Root && Root.shadowRoot) || Root;
   Root = Root && Root.querySelector("ha-panel-lovelace");
   if (Root) {
@@ -150,7 +150,7 @@ function currentConfig() {
   if (current_view_path == undefined) {
     return return_config;
   }
-  
+
   if (Animated_Config) {
     if (Animated_Config.entity || Animated_Config.default_url) {
       return_config = Animated_Config;
@@ -442,7 +442,7 @@ function renderBackgroundHTML() {
       doc_body = `<img src='${state_url}'>`
     }
 
-    
+
     var source_doc = `
     <html>
     <head>
@@ -505,7 +505,7 @@ function renderBackgroundHTML() {
           top: 0;
           min-width: 100vw; 
           min-height: 100vh;
-          z-index: -1;
+          z-index: -10;
       }
 
       hui-view-background{
@@ -517,24 +517,22 @@ function renderBackgroundHTML() {
         Opacity = current_config.opacity;
       }
 
-      var transparent_body = document.createElement ("style");
+      var transparent_body = document.createElement("style");
       transparent_body.innerHTML = `
         hui-masonry-view {
     	  opacity: 0.` + Opacity + `;
         }
       `;
 
-// transparent for top Pannel
-      STATUS_MESSAGE (current_config.transparent_panel);
       if (current_config.transparent_panel) {
         var html_element = document.querySelector("html");
-        html_element.style.removeProperty ('--app-header-background-color');
-      
+        html_element.style.removeProperty('--app-header-background-color');
+
         var ha_style = `<style>
     	    html {
     		--primary-color:initial;
     	    }`;
-        Header.insertAdjacentHTML('beforeBegin',ha_style);
+        Header.insertAdjacentHTML('beforeBegin', ha_style);
       }
 
       var div = document.createElement("div");
@@ -544,13 +542,13 @@ function renderBackgroundHTML() {
        <iframe id="background-iframe" class="bg-video" frameborder="0" srcdoc="${source_doc}"/> 
       
       `;
-    
+
       Root.shadowRoot.appendChild(style);
       Root.shadowRoot.appendChild(div);
-      View.insertBefore(transparent_body,View.firstChild);
-      
-      View.setAttribute ("style","background:none;");
-      
+      View.insertBefore(transparent_body, View.firstChild);
+
+      View.setAttribute("style", "background:none;");
+
       Previous_Url = state_url;
     }
     else {

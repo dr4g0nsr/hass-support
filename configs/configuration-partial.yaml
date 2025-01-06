@@ -1,8 +1,8 @@
 mode: yaml
 resources:
-  - url: /local/cards/clock-weather-card.js
+  - url: /local/defaults.js
     type: module
-  - url: /local/cards/sticky_note_card.js
+  - url: /local/cards/clock-weather-card.js
     type: module
   - url: /local/cards/sidebar-card.js
     type: module

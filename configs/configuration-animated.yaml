@@ -1,8 +1,8 @@
   default_url: "https://cdn.flixel.com/flixel/ypy8bw9fgw1zv2b4htp2.hd.mp4"
   included_users:
-    - Villhellm
+    - Admin
   # This entity is just an example, use whatever entity you would like
-  entity: "weather.home"
+  entity: "weather.forecast_home"
   state_url:
     'sunny':
       - "https://cdn.flixel.com/flixel/hlhff0h8md4ev0kju5be.hd.mp4"

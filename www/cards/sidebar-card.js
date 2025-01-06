@@ -17859,13 +17859,13 @@ class SidebarCard extends LitElement {
     constructor() {
         super();
         this.templateLines = [];
-        this.clock = false;
+        this.clock = true;
         this.updateMenu = true;
         this.digitalClock = false;
         this.twelveHourVersion = false;
-        this.digitalClockWithSeconds = false;
+        this.digitalClockWithSeconds = true;
         this.period = false;
-        this.date = false;
+        this.date = true;
         this.dateFormat = 'DD MMMM';
         this.bottomCard = null;
         this.CUSTOM_TYPE_PREFIX = 'custom:';
@@ -17884,7 +17884,8 @@ class SidebarCard extends LitElement {
      *   Element's HTML renderer (lit-element)  *
      * **************************************** */
     render() {
-        const sidebarMenu = this.config.sidebarMenu;
+        //console.log(this.config);
+        var sidebarMenu = this.config.sidebarMenu
         const title = 'title' in this.config ? this.config.title : false;
         const addStyle = 'style' in this.config;
         this.clock = this.config.clock ? this.config.clock : false;
@@ -17896,6 +17897,12 @@ class SidebarCard extends LitElement {
         this.dateFormat = this.config.dateFormat ? this.config.dateFormat : 'DD MMMM';
         this.bottomCard = this.config.bottomCard ? this.config.bottomCard : null;
         this.updateMenu = this.config.hasOwnProperty('updateMenu') ? this.config.updateMenu : true;
+
+        if (!sidebarMenu || sidebarMenu.length<1) {
+            console.info(`%c  Default menu loading  %c`,'color: chartreuse; background: black; font-weight: 700;', 'color: white; background: dimgrey; font-weight: 700;');
+            var sidebarMenu=window.defaultSidebarMenu;
+        }
+
         return html `
       ${addStyle
             ? html `
@@ -18224,7 +18231,6 @@ class SidebarCard extends LitElement {
         background-color:  var(--sidebar-background, var(--paper-listbox-background-color, var(--primary-background-color, #fff)));
       }
       .sidebar-inner {
-        padding: 20px;
         display: flex;
         flex-direction: column;
         box-sizing: border-box;
@@ -18234,7 +18240,6 @@ class SidebarCard extends LitElement {
       }
       .sidebarMenu {
         list-style: none;
-        margin: 20px 0;
         padding: 20px 0;
         border-top: 1px solid rgba(255, 255, 255, 0.2);
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -18242,7 +18247,7 @@ class SidebarCard extends LitElement {
       .sidebarMenu li {
         color: var(--sidebar-text-color, #000);
         position: relative;
-        padding: 10px 20px;
+        padding: 10px 15px;
         border-radius: 12px;
         font-size: 18px;
         line-height: 24px;
@@ -18273,8 +18278,8 @@ class SidebarCard extends LitElement {
         border-radius: 12px;
       }
       h1 {
-        margin-top: 0;
-        margin-bottom: 20px;
+        margin-top: 5%;
+        margin-bottom: 10px;
         font-size: 32px;
         line-height: 32px;
         font-weight: 200;
@@ -18282,10 +18287,11 @@ class SidebarCard extends LitElement {
         cursor: default;
       }
       h1.digitalClock {
-        font-size: 50px;
-        line-height: 50px;
+        font-size: 48px;
         cursor: default;
         font-weight: bold;
+        margin-left: auto;
+        margin-right: auto;
       }
       h1.digitalClock.with-seconds {
         font-size: 48px;
@@ -18296,9 +18302,14 @@ class SidebarCard extends LitElement {
         margin-bottom: 0;
         cursor: default;
       }
+      h2.date {
+        font-size: 23px;
+        margin-left: auto;
+        margin-right: auto;
+      }
       h2 {
         margin: 0;
-        margin-left: 10%;
+        margin-left: 5%;
         font-size: 23px;
         line-height: 26px;
         font-weight: 200;
@@ -18584,6 +18595,7 @@ function createCSS(sidebarConfig, width) {
     }
     return css;
 }
+
 // ##########################################################################################
 // ###   Helper methods
 // ##########################################################################################
