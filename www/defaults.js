@@ -1,4 +1,4 @@
-console.log('Loading defaults');
+globalThis.currentConfigVersion="1.0-1";
 
 globalThis.defaultSidebarMenu=[
     {action: 'navigate', navigation_path: '/dashboard-tablet', name: 'Home', active: true},    
@@ -11,3 +11,5 @@ globalThis.defaultSidebarMenu=[
 ];
 
 globalThis.animatedBackground=[];
+
+console.info(`%c LOADED CURRENT VERSION: `+globalThis.currentConfigVersion+` %c`,'color: chartreuse; background: black; font-weight: 700;', 'color: white; background: dimgrey; font-weight: 700;');

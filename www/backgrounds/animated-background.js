@@ -26,11 +26,11 @@ let Previous_Config;
 
 function STATUS_MESSAGE(message, force) {
   if (!Debug_Mode) {
-    console.log(Log_Prefix + message);
+    console.info(`%c `+Log_Prefix + message+` %c`,'color: chartreuse; background: black; font-weight: 700;', 'color: white; background: dimgrey; font-weight: 700;');
   }
   else {
     if (force) {
-      console.log(Debug_Prefix + message);
+      console.info(`%c `+Debug_Prefix + message+` %c`,'color: chartreuse; background: black; font-weight: 700;', 'color: white; background: dimgrey; font-weight: 700;');
     }
   }
 }

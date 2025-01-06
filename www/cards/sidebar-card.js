@@ -17974,7 +17974,9 @@ class SidebarCard extends LitElement {
               <div class="bottom"></div>
             `
             : html ``}
+            <div style="margin-left:auto;margin-right: 5px;font-size:80%;">Version: ${globalThis.currentConfigVersion}</div>
       </div>
+      
     `;
     }
     _runClock() {
