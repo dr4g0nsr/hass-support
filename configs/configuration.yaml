@@ -10,3 +10,10 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 
 lovelace: !include configs/configuration-partial.yaml
+
+ctsupport:
+
+logger:
+  default: warning
+  logs:
+    custom_components.support: debug

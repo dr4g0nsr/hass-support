@@ -1,0 +1,311 @@
+animated_background:
+  default_url: https://cdn.flixel.com/flixel/ypy8bw9fgw1zv2b4htp2.hd.mp4
+  opacity: 80
+  transparent_panel: false
+  included_users:
+    - Admin
+  entity: weather.forecast_home
+  state_url:
+    sunny:
+      - https://cdn.flixel.com/flixel/hlhff0h8md4ev0kju5be.hd.mp4
+      - https://cdn.flixel.com/flixel/zjqsoc6ecqhntpl5vacs.hd.mp4
+      - https://cdn.flixel.com/flixel/jvw1avupguhfbo11betq.hd.mp4
+      - https://cdn.flixel.com/flixel/8cmeusxf3pkanai43djs.hd.mp4
+      - https://cdn.flixel.com/flixel/guwb10mfddctfvwioaex.hd.mp4
+    partlycloudy:
+      - https://cdn.flixel.com/flixel/13e0s6coh6ayapvdyqnv.hd.mp4
+      - https://cdn.flixel.com/flixel/aorl3skmssy7udwopk22.hd.mp4
+      - https://cdn.flixel.com/flixel/qed6wvf2igukiioykg3r.hd.mp4
+      - https://cdn.flixel.com/flixel/3rd72eezaj6d23ahlo7y.hd.mp4
+      - https://cdn.flixel.com/flixel/9m11gd43m6qn3y93ntzp.hd.mp4
+      - https://cdn.flixel.com/flixel/hrkw2m8eofib9sk7t1v2.hd.mp4
+    cloudy:
+      - https://cdn.flixel.com/flixel/13e0s6coh6ayapvdyqnv.hd.mp4
+      - https://cdn.flixel.com/flixel/aorl3skmssy7udwopk22.hd.mp4
+      - https://cdn.flixel.com/flixel/qed6wvf2igukiioykg3r.hd.mp4
+      - https://cdn.flixel.com/flixel/3rd72eezaj6d23ahlo7y.hd.mp4
+      - https://cdn.flixel.com/flixel/9m11gd43m6qn3y93ntzp.hd.mp4
+      - https://cdn.flixel.com/flixel/hrkw2m8eofib9sk7t1v2.hd.mp4
+    mostlycloudy:
+      - https://cdn.flixel.com/flixel/e95h5cqyvhnrk4ytqt4q.hd.mp4
+      - https://cdn.flixel.com/flixel/l2bjw34wnusyf5q2qq3p.hd.mp4
+      - https://cdn.flixel.com/flixel/rrgta099ulami3zb9fd2.hd.mp4
+    clear-night:
+      - https://cdn.flixel.com/flixel/x9dr8caygivq5secll7i.hd.mp4
+      - https://cdn.flixel.com/flixel/v26zyfd6yf0r33s46vpe.hd.mp4
+      - https://cdn.flixel.com/flixel/ypy8bw9fgw1zv2b4htp2.hd.mp4
+      - https://cdn.flixel.com/flixel/rosz2gi676xhkiw1ut6i.hd.mp4
+    fog:
+      - https://cdn.flixel.com/flixel/vwqzlk4turo2449be9uf.hd.mp4
+      - https://cdn.flixel.com/flixel/5363uhabodwwrzgnq6vx.hd.mp4
+    rainy: https://cdn.flixel.com/flixel/f0w23bd0enxur5ff0bxz.hd.mp4
+views:
+  - title: Appartment floorplan
+    path: floorplan
+    theme: Google Dark Theme
+    panel: true
+    type: panel
+    badges: []
+    cards:
+      - type: picture-elements
+        image: /local/floorplan/base.png?version=5A2D44DB6D7011EED1F338463296B92E
+        elements:
+          - type: conditional
+            conditions:
+              - entity: light.yeelight_color_0x5eb7f5e
+                state: 'on'
+            elements:
+              - type: image
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                entity:
+                  - light.yeelight_color_0x5eb7f5e
+                image: >-
+                  /local/floorplan/light.yeelight_color_0x5eb7f5e.png?version=BCFE14826390E2CF2F4EC4E743167BB9
+                filter: none
+                style:
+                  left: 50%
+                  top: 50%
+                  width: 100%
+                  mix-blend-mode: lighten
+          - type: conditional
+            conditions:
+              - entity: light.tv_dimmer_light
+                state: 'on'
+            elements:
+              - type: image
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                entity:
+                  - light.tv_dimmer_light
+                image: >-
+                  /local/floorplan/light.tv_dimmer_light.png?version=AA49B12A280584093FACAABF03DE4CC4
+                filter: none
+                style:
+                  left: 50%
+                  top: 50%
+                  width: 100%
+                  mix-blend-mode: lighten
+          - type: conditional
+            conditions:
+              - entity: kitchen
+                state: 'on'
+            elements:
+              - type: image
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                entity:
+                  - kitchen
+                image: >-
+                  /local/floorplan/kitchen.png?version=4D1E00E4D9243A7ED3ECDBB6A56B5577
+                filter: none
+                style:
+                  left: 50%
+                  top: 50%
+                  width: 100%
+                  mix-blend-mode: lighten
+          - type: conditional
+            conditions:
+              - entity: wc
+                state: 'on'
+            elements:
+              - type: image
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                entity:
+                  - wc
+                image: >-
+                  /local/floorplan/wc.png?version=72B3690CAABB873C9E0283010A82C1E2
+                filter: none
+                style:
+                  left: 50%
+                  top: 50%
+                  width: 100%
+                  mix-blend-mode: lighten
+          - type: conditional
+            conditions:
+              - entity: light.svetlo_sa_strane_light
+                state: 'on'
+            elements:
+              - type: image
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                entity:
+                  - light.svetlo_sa_strane_light
+                image: >-
+                  /local/floorplan/light.svetlo_sa_strane_light.png?version=FC413ED342411BBC1F534FB6BB130EC8
+                filter: none
+                style:
+                  left: 50%
+                  top: 50%
+                  width: 100%
+                  mix-blend-mode: lighten
+          - type: conditional
+            conditions:
+              - entity: bedroom
+                state: 'on'
+            elements:
+              - type: image
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                entity:
+                  - bedroom
+                image: >-
+                  /local/floorplan/bedroom.png?version=63AFB3A26DE466880030687842583BFC
+                filter: none
+                style:
+                  left: 50%
+                  top: 50%
+                  width: 100%
+                  mix-blend-mode: lighten
+          - type: conditional
+            conditions:
+              - entity: bathroom
+                state: 'on'
+            elements:
+              - type: image
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                entity:
+                  - bathroom
+                image: >-
+                  /local/floorplan/bathroom.png?version=0323C7AF2DE3AD580727B70CD658284E
+                filter: none
+                style:
+                  left: 50%
+                  top: 50%
+                  width: 100%
+                  mix-blend-mode: lighten
+          - type: state-icon
+            entity: light.yeelight_color_0x5eb7f5e
+            title: null
+            style:
+              top: 66.66%
+              left: 48.14%
+              border-radius: 50%
+              text-align: center
+              background-color: rgba(255, 255, 255, 0.3)
+            tap_action:
+              action: toggle
+          - type: state-icon
+            entity: light.tv_dimmer_light
+            title: null
+            style:
+              top: 36.38%
+              left: 51.04%
+              border-radius: 50%
+              text-align: center
+              background-color: rgba(255, 255, 255, 0.3)
+            tap_action:
+              action: toggle
+          - type: state-icon
+            entity: kitchen
+            title: null
+            style:
+              top: 25.57%
+              left: 27.96%
+              border-radius: 50%
+              text-align: center
+              background-color: rgba(255, 255, 255, 0.3)
+            tap_action:
+              action: toggle
+          - type: state-icon
+            entity: wc
+            title: null
+            style:
+              top: 13.27%
+              left: 38.19%
+              border-radius: 50%
+              text-align: center
+              background-color: rgba(255, 255, 255, 0.3)
+            tap_action:
+              action: toggle
+          - type: state-icon
+            entity: light.svetlo_sa_strane_light
+            title: Svetlo sa strane
+            style:
+              top: 39.71%
+              left: 16.28%
+              border-radius: 50%
+              text-align: center
+              background-color: rgba(255, 255, 255, 0.3)
+            tap_action:
+              action: toggle
+          - type: state-icon
+            entity: bedroom
+            title: null
+            style:
+              top: 79.26%
+              left: 70.43%
+              border-radius: 50%
+              text-align: center
+              background-color: rgba(255, 255, 255, 0.3)
+            tap_action:
+              action: toggle
+          - type: state-icon
+            entity: bathroom
+            title: null
+            style:
+              top: 37.54%
+              left: 86.75%
+              border-radius: 50%
+              text-align: center
+              background-color: rgba(255, 255, 255, 0.3)
+            tap_action:
+              action: toggle
+sidebar:
+  width:
+    mobile: 0
+    tablet: 17
+    desktop: 20
+  digitalClock: true
+  date: true
+  dateFormat: DD-MM-YY
+  twelveHourVersion: false
+  period: true
+  clock: false
+  hideTopMenu: false
+  hideHassSidebar: false
+  sidebarMenu:
+    - action: navigate
+      navigation_path: /dashboard-tablet
+      name: Home
+      active: true
+    - action: navigate
+      navigation_path: /dashboard-cameras
+      name: Cameras
+      active: true
+    - action: navigate
+      navigation_path: /dashboard-lights
+      name: Lights
+      active: true
+    - action: navigate
+      navigation_path: /dashboard-security
+      name: Security
+      active: true
+    - action: navigate
+      navigation_path: /dashboard-floorplan
+      name: Floorplan
+      active: true
+    - action: navigate
+      navigation_path: /dashboard-temperatures
+      name: Temperatures
+      active: true
+    - action: navigate
+      navigation_path: /dashboard-health
+      name: Health
+      active: true
