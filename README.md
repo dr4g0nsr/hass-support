@@ -1,1 +1,1 @@
-# hass-support v1.0
+# hass-support v1.1
