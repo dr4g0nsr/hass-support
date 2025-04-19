@@ -151,7 +151,7 @@ views:
               - temperature
               - humidity
             type: area
-            area: outside
+            area: passtrough
           - alert_classes:
               - motion
               - moisture
@@ -159,7 +159,7 @@ views:
               - temperature
               - humidity
             type: area
-            area: walk
+            area: bedroom
       - type: grid
         cards:
           - type: heading
@@ -191,4 +191,28 @@ views:
             entity: sensor.air_purifier_second_motor_speed
           - type: tile
             entity: sensor.air_purifier_temperature
+          - type: button
+            name: Open
+            icon: mdi:arrow-up-bold
+            tap_action:
+              action: call-service
+              service: cover.open_cover
+              target:
+                entity_id: cover.ct_curtain_ctrl_cb2s_160fa2_curtains1
+          - type: button
+            name: Stop
+            icon: mdi:stop
+            tap_action:
+              action: call-service
+              service: cover.stop_cover
+              target:
+                entity_id: cover.ct_curtain_ctrl_cb2s_160fa2_curtains1
+          - type: button
+            name: Close
+            icon: mdi:arrow-down-bold
+            tap_action:
+              action: call-service
+              service: cover.close_cover
+              target:
+                entity_id: cover.ct_curtain_ctrl_cb2s_160fa2_curtains1
     badges: []
