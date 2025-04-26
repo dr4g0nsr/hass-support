@@ -48,11 +48,36 @@ views:
     badges: []
     cards:
       - type: picture-elements
-        image: /local/floorplan/base.png?version=5A2D44DB6D7011EED1F338463296B92E
+        image: /local/floorplan/base.png?version=1FE4ACDF3D3DABE52188A3DD8D38F081
         elements:
+          - type: custom:config-template-card
+            variables:
+              LIGHT_STATE: states['light.yeelight_color_0x5eb7f5e'].state
+              COLOR_MODE: states['light.yeelight_color_0x5eb7f5e'].attributes.color_mode
+              LIGHT_COLOR: states['light.yeelight_color_0x5eb7f5e'].attributes.hs_color
+              BRIGHTNESS: states['light.yeelight_color_0x5eb7f5e'].attributes.brightness
+            entities:
+              - light.yeelight_color_0x5eb7f5e
+            element:
+              type: image
+              image: /local/floorplan/transparent.png?version=56ABE4CBC175363DA0810882244B34FF
+              state_image:
+                'on': >-
+                  ${COLOR_MODE === 'color_temp' || (COLOR_MODE === 'rgb' && LIGHT_COLOR && LIGHT_COLOR[0] == 0 && LIGHT_COLOR[1] == 0) ?
+                  '/local/floorplan/light.yeelight_color_0x5eb7f5e.png?version=2EDE96E4C0293B48B4D21AB7C0485674' :
+                  '/local/floorplan/light.yeelight_color_0x5eb7f5e.red.png?version=4AE6026D51AA934AC26ED433BA77BF47' }
+              entity: light.yeelight_color_0x5eb7f5e
+            style:
+              filter: '${ "hue-rotate(" + (LIGHT_COLOR ? LIGHT_COLOR[0] : 0) + "deg)"}'
+              opacity: '${LIGHT_STATE === ''on'' ? (BRIGHTNESS / 255) : ''100''}'
+              mix-blend-mode: lighten
+              pointer-events: none
+              left: 50%
+              top: 50%
+              width: 100%
           - type: conditional
             conditions:
-              - entity: light.yeelight_color_0x5eb7f5e
+              - entity: switch.ct_switch_one_relay_cb3s_bbaf17_relay_1
                 state: 'on'
             elements:
               - type: image
@@ -61,9 +86,8 @@ views:
                 hold_action:
                   action: none
                 entity:
-                  - light.yeelight_color_0x5eb7f5e
-                image: >-
-                  /local/floorplan/light.yeelight_color_0x5eb7f5e.png?version=BCFE14826390E2CF2F4EC4E743167BB9
+                  - switch.ct_switch_one_relay_cb3s_bbaf17_relay_1
+                image: /local/floorplan/switch.ct_switch_one_relay_cb3s_bbaf17_relay_1.png?version=89720FF61B851F6EA935C8B9E2D18CF2
                 filter: none
                 style:
                   left: 50%
@@ -72,7 +96,7 @@ views:
                   mix-blend-mode: lighten
           - type: conditional
             conditions:
-              - entity: light.tv_dimmer_light
+              - entity: switch.ct_switch_two_relay_cb3s_c02f20_relay_1
                 state: 'on'
             elements:
               - type: image
@@ -81,9 +105,8 @@ views:
                 hold_action:
                   action: none
                 entity:
-                  - light.tv_dimmer_light
-                image: >-
-                  /local/floorplan/light.tv_dimmer_light.png?version=AA49B12A280584093FACAABF03DE4CC4
+                  - switch.ct_switch_two_relay_cb3s_c02f20_relay_1
+                image: /local/floorplan/switch.ct_switch_two_relay_cb3s_c02f20_relay_1.png?version=2AB327A191D88179F1D1B29CE5164C24
                 filter: none
                 style:
                   left: 50%
@@ -92,7 +115,7 @@ views:
                   mix-blend-mode: lighten
           - type: conditional
             conditions:
-              - entity: kitchen
+              - entity: switch.ct_switch_one_relay_cb3s_bba7ca_relay_1
                 state: 'on'
             elements:
               - type: image
@@ -101,9 +124,8 @@ views:
                 hold_action:
                   action: none
                 entity:
-                  - kitchen
-                image: >-
-                  /local/floorplan/kitchen.png?version=4D1E00E4D9243A7ED3ECDBB6A56B5577
+                  - switch.ct_switch_one_relay_cb3s_bba7ca_relay_1
+                image: /local/floorplan/switch.ct_switch_one_relay_cb3s_bba7ca_relay_1.png?version=7F5D7C67D449D68C49E4C52CCA46C577
                 filter: none
                 style:
                   left: 50%
@@ -112,7 +134,7 @@ views:
                   mix-blend-mode: lighten
           - type: conditional
             conditions:
-              - entity: wc
+              - entity: switch.ct_switch_one_relay_cb3s_bbdc1c_relay_1
                 state: 'on'
             elements:
               - type: image
@@ -121,9 +143,8 @@ views:
                 hold_action:
                   action: none
                 entity:
-                  - wc
-                image: >-
-                  /local/floorplan/wc.png?version=72B3690CAABB873C9E0283010A82C1E2
+                  - switch.ct_switch_one_relay_cb3s_bbdc1c_relay_1
+                image: /local/floorplan/switch.ct_switch_one_relay_cb3s_bbdc1c_relay_1.png?version=62E771EC8AAE5B69C2B418B5A4F59C27
                 filter: none
                 style:
                   left: 50%
@@ -132,7 +153,7 @@ views:
                   mix-blend-mode: lighten
           - type: conditional
             conditions:
-              - entity: light.svetlo_sa_strane_light
+              - entity: switch.ct_switch_one_relay_cb3s_bbecda_relay_1
                 state: 'on'
             elements:
               - type: image
@@ -141,9 +162,8 @@ views:
                 hold_action:
                   action: none
                 entity:
-                  - light.svetlo_sa_strane_light
-                image: >-
-                  /local/floorplan/light.svetlo_sa_strane_light.png?version=FC413ED342411BBC1F534FB6BB130EC8
+                  - switch.ct_switch_one_relay_cb3s_bbecda_relay_1
+                image: /local/floorplan/switch.ct_switch_one_relay_cb3s_bbecda_relay_1.png?version=6C8065F3FE88F9C3EDD1B747DF39565A
                 filter: none
                 style:
                   left: 50%
@@ -152,7 +172,7 @@ views:
                   mix-blend-mode: lighten
           - type: conditional
             conditions:
-              - entity: bedroom
+              - entity: switch.ct_switch_one_relay_cb3s_bba661_relay_1
                 state: 'on'
             elements:
               - type: image
@@ -161,9 +181,8 @@ views:
                 hold_action:
                   action: none
                 entity:
-                  - bedroom
-                image: >-
-                  /local/floorplan/bedroom.png?version=63AFB3A26DE466880030687842583BFC
+                  - switch.ct_switch_one_relay_cb3s_bba661_relay_1
+                image: /local/floorplan/switch.ct_switch_one_relay_cb3s_bba661_relay_1.png?version=472548B27AD8859DB2E6B0446E26718E
                 filter: none
                 style:
                   left: 50%
@@ -172,7 +191,7 @@ views:
                   mix-blend-mode: lighten
           - type: conditional
             conditions:
-              - entity: bathroom
+              - entity: switch.ct_switch_one_relay_cb3s_bba7af_relay_1
                 state: 'on'
             elements:
               - type: image
@@ -181,9 +200,8 @@ views:
                 hold_action:
                   action: none
                 entity:
-                  - bathroom
-                image: >-
-                  /local/floorplan/bathroom.png?version=0323C7AF2DE3AD580727B70CD658284E
+                  - switch.ct_switch_one_relay_cb3s_bba7af_relay_1
+                image: /local/floorplan/switch.ct_switch_one_relay_cb3s_bba7af_relay_1.png?version=6FEA4258D0606BF9611961B4A32E4FF9
                 filter: none
                 style:
                   left: 50%
@@ -192,120 +210,89 @@ views:
                   mix-blend-mode: lighten
           - type: state-icon
             entity: light.yeelight_color_0x5eb7f5e
-            title: null
-            style:
-              top: 66.66%
-              left: 48.14%
-              border-radius: 50%
-              text-align: center
-              background-color: rgba(255, 255, 255, 0.3)
-            tap_action:
-              action: toggle
-          - type: state-icon
-            entity: light.tv_dimmer_light
-            title: null
-            style:
-              top: 36.38%
-              left: 51.04%
-              border-radius: 50%
-              text-align: center
-              background-color: rgba(255, 255, 255, 0.3)
-            tap_action:
-              action: toggle
-          - type: state-icon
-            entity: kitchen
-            title: null
-            style:
-              top: 25.57%
-              left: 27.96%
-              border-radius: 50%
-              text-align: center
-              background-color: rgba(255, 255, 255, 0.3)
-            tap_action:
-              action: toggle
-          - type: state-icon
-            entity: wc
-            title: null
-            style:
-              top: 13.27%
-              left: 38.19%
-              border-radius: 50%
-              text-align: center
-              background-color: rgba(255, 255, 255, 0.3)
-            tap_action:
-              action: toggle
-          - type: state-icon
-            entity: light.svetlo_sa_strane_light
             title: Svetlo sa strane
             style:
-              top: 39.71%
-              left: 16.28%
+              top: 61.41%
+              left: 21.56%
               border-radius: 50%
               text-align: center
               background-color: rgba(255, 255, 255, 0.3)
             tap_action:
               action: toggle
           - type: state-icon
-            entity: bedroom
-            title: null
+            entity: switch.ct_switch_one_relay_cb3s_bbaf17_relay_1
+            title: Svetlo sa strane
             style:
-              top: 79.26%
-              left: 70.43%
+              top: 46.01%
+              left: 32.27%
               border-radius: 50%
               text-align: center
               background-color: rgba(255, 255, 255, 0.3)
             tap_action:
               action: toggle
           - type: state-icon
-            entity: bathroom
-            title: null
+            entity: switch.ct_switch_two_relay_cb3s_c02f20_relay_1
+            title: Svetlo sa strane
             style:
-              top: 37.54%
-              left: 86.75%
+              top: 46.13%
+              left: 37.42%
               border-radius: 50%
               text-align: center
               background-color: rgba(255, 255, 255, 0.3)
             tap_action:
               action: toggle
-sidebar:
-  width:
-    mobile: 0
-    tablet: 17
-    desktop: 20
-  digitalClock: true
-  date: true
-  dateFormat: DD-MM-YY
-  twelveHourVersion: false
-  period: true
-  clock: false
-  hideTopMenu: false
-  hideHassSidebar: false
-  sidebarMenu:
-    - action: navigate
-      navigation_path: /dashboard-tablet
-      name: Home
-      active: true
-    - action: navigate
-      navigation_path: /dashboard-cameras
-      name: Cameras
-      active: true
-    - action: navigate
-      navigation_path: /dashboard-lights
-      name: Lights
-      active: true
-    - action: navigate
-      navigation_path: /dashboard-security
-      name: Security
-      active: true
-    - action: navigate
-      navigation_path: /dashboard-floorplan
-      name: Floorplan
-      active: true
-    - action: navigate
-      navigation_path: /dashboard-temperatures
-      name: Temperatures
-      active: true
-    - action: navigate
-      navigation_path: /dashboard-health
-      name: Health
-      active: true
+          - type: state-icon
+            entity: switch.ct_switch_one_relay_cb3s_bba7ca_relay_1
+            title: Svetlo sa strane
+            style:
+              top: 59.90%
+              left: 40.62%
+              border-radius: 50%
+              text-align: center
+              background-color: rgba(255, 255, 255, 0.3)
+            tap_action:
+              action: toggle
+          - type: state-icon
+            entity: switch.ct_switch_one_relay_cb3s_bbdc1c_relay_1
+            title: null
+            style:
+              top: 62.27%
+              left: 49.73%
+              border-radius: 50%
+              text-align: center
+              background-color: rgba(255, 255, 255, 0.3)
+            tap_action:
+              action: toggle
+          - type: state-icon
+            entity: switch.ct_switch_one_relay_cb3s_bbecda_relay_1
+            title: Spavaca
+            style:
+              top: 62.15%
+              left: 69.81%
+              border-radius: 50%
+              text-align: center
+              background-color: rgba(255, 255, 255, 0.3)
+            tap_action:
+              action: toggle
+          - type: state-icon
+            entity: switch.ct_switch_one_relay_cb3s_bba661_relay_1
+            title: null
+            style:
+              top: 49.28%
+              left: 53.29%
+              border-radius: 50%
+              text-align: center
+              background-color: rgba(255, 255, 255, 0.3)
+            tap_action:
+              action: toggle
+          - type: state-icon
+            entity: switch.ct_switch_one_relay_cb3s_bba7af_relay_1
+            title: null
+            style:
+              top: 53.49%
+              left: 48.81%
+              border-radius: 50%
+              text-align: center
+              background-color: rgba(255, 255, 255, 0.3)
+            tap_action:
+              action: toggle
