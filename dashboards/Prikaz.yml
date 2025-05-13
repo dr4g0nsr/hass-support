@@ -86,14 +86,14 @@ views:
             hide_today_section: false
             hide_forecast_section: false
             show_humidity: true
-            hide_clock: true
-            hide_date: true
+            hide_clock: false
+            hide_date: false
             hourly_forecast: false
-            use_browser_time: true
+            use_browser_time: false
             time_zone: null
-            show_decimal: true
-            apparent_sensor: sensor.real_feel_temperature
-            aqi_sensor: sensor.air_quality_index
+            show_decimal: false
+            apparent_sensor: sensor.air_purifier_temperature
+            aqi_sensor: sensor.air_purifier_pm2_5
           - alert_classes:
               - motion
               - moisture
@@ -163,8 +163,51 @@ views:
             entity: sensor.air_purifier_pm2_5
           - type: gauge
             entity: sensor.tasmota_tuyasns_illuminance
-    badges: []
+    badges:
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: person.cirko
+        name: Cirko
+        show_entity_picture: true
+        color: primary
+        state_content:
+          - state
+          - last_changed
+        tap_action:
+          action: more-info
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: person.aca
+        name: Aca
+        show_entity_picture: true
+        color: primary
+        state_content:
+          - state
+          - last_changed
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: person.tanja
+        name: Tanja
+        show_entity_picture: true
+        color: primary
+        state_content:
+          - state
+          - last_changed
+        icon: mdi:account
     cards: []
+    header:
+      card:
+        type: markdown
+        content: |-
+          # Hello {{ user }}
+          Add your text here, template variables are supported ✨
+        text_only: true
   - type: sections
     max_columns: 2
     title: Temperatura
@@ -254,7 +297,7 @@ views:
             entity: climate.ct_sensorset_283a40_thermostat
             name: Termostat
     cards: []
-  - title: Appartment floorplan
+  - title: Plan
     path: floorplan
     theme: Google Dark Theme
     panel: true
@@ -555,8 +598,10 @@ views:
               - button.ct_switch_one_relay_cb3s_bba661_backlight_toggle
               - light.ct_switch_one_relay_cb3s_bbecda_backlight
               - button.ct_switch_one_relay_cb3s_bbecda_backlight_toggle
-    title: Lights
+    title: Svetla
     cards: []
+    type: sections
+    max_columns: 4
   - badges: []
     sections:
       - cards:
@@ -576,8 +621,10 @@ views:
         cards:
           - type: heading
             heading: New section
-    title: Home
+    title: Kamere
     cards: []
+    type: sections
+    max_columns: 2
   - sections:
       - type: grid
         cards:
@@ -598,5 +645,7 @@ views:
               - sensor.ct_sensorset_283a40_bme680_co2_equivalent
               - sensor.ct_sensorset_283a40_bme680_gas_resistance
               - sensor.ct_sensorset_283a40_bme680_iaq_accuracy
-    title: Home
+    title: Zdravlje
     cards: []
+    type: sections
+    max_columns: 2
