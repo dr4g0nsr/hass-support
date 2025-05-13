@@ -67,9 +67,6 @@ views:
     sections:
       - type: grid
         cards:
-          - type: heading
-            heading: States
-            heading_style: title
           - type: custom:clock-weather-card
             entity: weather.forecast_home
             title: Home
@@ -102,6 +99,9 @@ views:
               - humidity
             type: area
             area: living_room
+            grid_options:
+              columns: 12
+              rows: 5
           - alert_classes:
               - motion
               - moisture
@@ -110,6 +110,9 @@ views:
               - humidity
             type: area
             area: passtrough
+            grid_options:
+              columns: 12
+              rows: 5
           - alert_classes:
               - motion
               - moisture
@@ -118,11 +121,11 @@ views:
               - humidity
             type: area
             area: bedroom
+            grid_options:
+              columns: 12
+              rows: 5
       - type: grid
         cards:
-          - type: heading
-            heading: Roletne
-            heading_style: title
           - show_name: true
             show_icon: true
             type: button
@@ -161,8 +164,26 @@ views:
             entity: light.yeelight_color_0x5eb7f5e
           - type: gauge
             entity: sensor.air_purifier_pm2_5
+            grid_options:
+              columns: 12
+              rows: 5
           - type: gauge
             entity: sensor.tasmota_tuyasns_illuminance
+            grid_options:
+              columns: 12
+              rows: 5
+          - chart_type: line
+            period: hour
+            type: statistics-graph
+            entities:
+              - sensor.ct_smart_powermeter_91b7cc_total_daily_power
+              - sensor.athom_smart_plug_v2_ec1878_energy
+            stat_types:
+              - sum
+              - state
+              - change
+            title: Struja
+            days_to_show: 1
     badges:
       - type: entity
         show_name: true
