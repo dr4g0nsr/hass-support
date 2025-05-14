@@ -13,6 +13,8 @@ lovelace: !include configs/configuration-partial.yaml
 
 ctsupport:
 
+ffmpeg:
+
 logger:
   default: warning
   logs:
