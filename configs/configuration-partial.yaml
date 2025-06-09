@@ -4,11 +4,15 @@ resources:
     type: module
   - url: /local/cards/clock-weather-card.js
     type: module
-  - url: /local/cards/sidebar-card.js
-    type: module
   - url: /local/cards/floorplan.js
     type: module
   - url: /local/cards/config-template-card.js
     type: module
   - url: /local/backgrounds/animated-background.js
+    type: module
+  - url: /local/cards/thermostat/main.js
+    type: module
+  - url: /local/cards/digital-clock.js
+    type: module
+  - url: /local/cards/card-mod.js
     type: module
