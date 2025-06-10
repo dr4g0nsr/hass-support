@@ -16,3 +16,5 @@ resources:
     type: module
   - url: /local/cards/card-mod.js
     type: module
+  - url: /local/cards/pqina-flip-clock-card.js
+    type: module
