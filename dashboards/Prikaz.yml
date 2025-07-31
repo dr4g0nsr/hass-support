@@ -20,46 +20,7 @@ kiosk_mode:
   user_settings:
     - users:
         - cirko
-      kiosk: true
-animated_background:
-  default_url: https://cdn.flixel.com/flixel/ypy8bw9fgw1zv2b4htp2.hd.mp4
-  opacity: 80
-  transparent_panel: false
-  entity: weather.forecast_home
-  state_url:
-    sunny:
-      - https://cdn.flixel.com/flixel/hlhff0h8md4ev0kju5be.hd.mp4
-      - https://cdn.flixel.com/flixel/zjqsoc6ecqhntpl5vacs.hd.mp4
-      - https://cdn.flixel.com/flixel/jvw1avupguhfbo11betq.hd.mp4
-      - https://cdn.flixel.com/flixel/8cmeusxf3pkanai43djs.hd.mp4
-      - https://cdn.flixel.com/flixel/guwb10mfddctfvwioaex.hd.mp4
-    partlycloudy:
-      - https://cdn.flixel.com/flixel/13e0s6coh6ayapvdyqnv.hd.mp4
-      - https://cdn.flixel.com/flixel/aorl3skmssy7udwopk22.hd.mp4
-      - https://cdn.flixel.com/flixel/qed6wvf2igukiioykg3r.hd.mp4
-      - https://cdn.flixel.com/flixel/3rd72eezaj6d23ahlo7y.hd.mp4
-      - https://cdn.flixel.com/flixel/9m11gd43m6qn3y93ntzp.hd.mp4
-      - https://cdn.flixel.com/flixel/hrkw2m8eofib9sk7t1v2.hd.mp4
-    cloudy:
-      - https://cdn.flixel.com/flixel/13e0s6coh6ayapvdyqnv.hd.mp4
-      - https://cdn.flixel.com/flixel/aorl3skmssy7udwopk22.hd.mp4
-      - https://cdn.flixel.com/flixel/qed6wvf2igukiioykg3r.hd.mp4
-      - https://cdn.flixel.com/flixel/3rd72eezaj6d23ahlo7y.hd.mp4
-      - https://cdn.flixel.com/flixel/9m11gd43m6qn3y93ntzp.hd.mp4
-      - https://cdn.flixel.com/flixel/hrkw2m8eofib9sk7t1v2.hd.mp4
-    mostlycloudy:
-      - https://cdn.flixel.com/flixel/e95h5cqyvhnrk4ytqt4q.hd.mp4
-      - https://cdn.flixel.com/flixel/l2bjw34wnusyf5q2qq3p.hd.mp4
-      - https://cdn.flixel.com/flixel/rrgta099ulami3zb9fd2.hd.mp4
-    clear-night:
-      - https://cdn.flixel.com/flixel/x9dr8caygivq5secll7i.hd.mp4
-      - https://cdn.flixel.com/flixel/v26zyfd6yf0r33s46vpe.hd.mp4
-      - https://cdn.flixel.com/flixel/ypy8bw9fgw1zv2b4htp2.hd.mp4
-      - https://cdn.flixel.com/flixel/rosz2gi676xhkiw1ut6i.hd.mp4
-    fog:
-      - https://cdn.flixel.com/flixel/vwqzlk4turo2449be9uf.hd.mp4
-      - https://cdn.flixel.com/flixel/5363uhabodwwrzgnq6vx.hd.mp4
-    rainy: https://cdn.flixel.com/flixel/f0w23bd0enxur5ff0bxz.hd.mp4
+      kiosk: false
 views:
   - title: Glavna
     type: sections
@@ -67,6 +28,21 @@ views:
     sections:
       - type: grid
         cards:
+          - type: custom:digital-clock
+            locale: sr
+            card_mod:
+              style: |
+                ha-card {
+                  /* This affects the entire card container */
+                }
+                span.first-line {
+                  font-size: 7em;
+                  margin-top: 1em;
+                }
+                span.second-line {
+                  font-size: 2.5em;
+                  margin-bottom: 3em;
+                }
           - type: custom:clock-weather-card
             entity: weather.forecast_home
             title: Home
@@ -75,7 +51,7 @@ views:
             humidity_sensor: sensor.outdoor_humidity
             weather_icon_type: line
             animated_icon: true
-            forecast_rows: 7
+            forecast_rows: 10
             locale: en-GB
             time_pattern: h:mm a
             time_format: 24
@@ -83,20 +59,27 @@ views:
             hide_today_section: false
             hide_forecast_section: false
             show_humidity: true
-            hide_clock: false
-            hide_date: false
+            hide_clock: true
+            hide_date: true
             hourly_forecast: false
             use_browser_time: false
             time_zone: null
             show_decimal: false
             apparent_sensor: sensor.air_purifier_temperature
             aqi_sensor: sensor.air_purifier_pm2_5
+        column_span: 2
+      - type: grid
+        cards:
           - alert_classes:
-              - motion
               - moisture
+              - connectivity
+              - motion
             sensor_classes:
               - temperature
               - humidity
+              - illuminance
+              - pm25
+              - volatile_organic_compounds_parts
             type: area
             area: living_room
             grid_options:
@@ -108,6 +91,7 @@ views:
             sensor_classes:
               - temperature
               - humidity
+              - energy
             type: area
             area: passtrough
             grid_options:
@@ -119,134 +103,45 @@ views:
             sensor_classes:
               - temperature
               - humidity
+              - power
+              - energy
             type: area
             area: bedroom
             grid_options:
               columns: 12
               rows: 5
-      - type: grid
-        cards:
-          - show_name: true
-            show_icon: true
-            type: button
-            name: Open
-            icon: mdi:arrow-up-bold
-            tap_action:
-              action: call-service
-              service: cover.open_cover
-              target:
-                entity_id: cover.ct_curtain_ctrl_cb2s_160fa2_curtains1
-            grid_options:
-              columns: 3
-              rows: 2
-          - type: button
-            name: Stop
-            icon: mdi:stop
-            tap_action:
-              action: call-service
-              service: cover.stop_cover
-              target:
-                entity_id: cover.ct_curtain_ctrl_cb2s_160fa2_curtains1
-          - show_name: true
-            show_icon: true
-            type: button
-            name: Close
-            icon: mdi:arrow-down-bold
-            tap_action:
-              action: call-service
-              service: cover.close_cover
-              target:
-                entity_id: cover.ct_curtain_ctrl_cb2s_160fa2_curtains1
-            grid_options:
-              columns: 3
-              rows: 2
-          - type: light
-            entity: light.yeelight_color_0x5eb7f5e
-          - type: gauge
-            entity: sensor.air_purifier_pm2_5
-            grid_options:
-              columns: 12
-              rows: 5
-          - type: gauge
-            entity: sensor.tasmota_tuyasns_illuminance
-            grid_options:
-              columns: 12
-              rows: 5
-          - chart_type: line
-            period: hour
-            type: statistics-graph
-            entities:
-              - sensor.ct_smart_powermeter_91b7cc_total_daily_power
-              - sensor.athom_smart_plug_v2_ec1878_energy
-            stat_types:
-              - sum
-              - state
-              - change
-            title: Struja
-            days_to_show: 1
-    badges:
-      - type: entity
-        show_name: true
-        show_state: true
-        show_icon: true
-        entity: person.cirko
-        name: Cirko
-        show_entity_picture: true
-        color: primary
-        state_content:
-          - state
-          - last_changed
-        tap_action:
-          action: more-info
-      - type: entity
-        show_name: true
-        show_state: true
-        show_icon: true
-        entity: person.aca
-        name: Aca
-        show_entity_picture: true
-        color: primary
-        state_content:
-          - state
-          - last_changed
-      - type: entity
-        show_name: true
-        show_state: true
-        show_icon: true
-        entity: person.tanja
-        name: Tanja
-        show_entity_picture: true
-        color: primary
-        state_content:
-          - state
-          - last_changed
-        icon: mdi:account
+          - alert_classes:
+              - motion
+              - moisture
+            sensor_classes:
+              - temperature
+              - humidity
+            type: area
+            area: child
+        column_span: 2
+    badges: []
     cards: []
     header:
-      card:
-        type: markdown
-        content: |-
-          # Hello {{ user }}
-          Add your text here, template variables are supported ✨
-        text_only: true
+      layout: center
+      badges_position: bottom
   - type: sections
     max_columns: 2
-    title: Temperatura
+    title: Temp
     path: temperatura
     sections:
       - type: grid
         cards:
-          - heading: Unutra SensorSET BME680
-            type: heading
+          - type: heading
+            icon: mdi:fridge
+            heading: Unutra
             heading_style: title
-            icon: mdi:sun-thermometer-outline
-          - entity: sensor.ct_sensorset_283a40_bme680_temperature
+          - entity: sensor.ct_sensorset_temp
             max: 50
-            min: -20
-            name: Unutrašnja  temperatura
+            min: 0
+            name: Temperatura DHT22
             needle: true
             severity:
-              green: 0
+              green: 10
               yellow: 30
               red: 40
             tap_action:
@@ -255,7 +150,22 @@ views:
             grid_options:
               columns: 6
               rows: 3
-          - entity: sensor.ct_sensorset_283a40_bme680_humidity
+          - entity: sensor.air_purifier_temperature
+            max: 50
+            name: Temperatura AP
+            needle: true
+            severity:
+              green: 10
+              yellow: 30
+              red: 40
+            tap_action:
+              action: none
+            type: gauge
+            grid_options:
+              columns: 6
+              rows: 3
+            min: 0
+          - entity: sensor.ct_sensorset_humidity
             min: -20
             needle: true
             severity:
@@ -266,57 +176,71 @@ views:
               action: none
             type: gauge
             max: 100
-            name: Unutrašnja vlažnost
-            grid_options:
-              columns: 6
-              rows: 3
-          - type: entities
-            entities:
-              - sensor.ct_sensorset_283a40_bme680_breath_voc_equivalent
-              - sensor.ct_sensorset_283a40_bme680_co2_equivalent
-              - sensor.ct_sensorset_283a40_bme680_gas_resistance
-              - sensor.ct_sensorset_283a40_bme680_iaq
-              - sensor.ct_sensorset_283a40_bme680_iaq_accuracy
-              - sensor.ct_sensorset_283a40_bme680_numeric_iaq_accuracy
-              - sensor.ct_sensorset_283a40_bme680_pressure
-          - entity: sensor.air_purifier_temperature
-            max: 50
-            min: 0
-            name: Temperatura dnevne sobe
-            needle: true
-            severity:
-              green: 10
-              yellow: 30
-              red: 50
-            tap_action:
-              action: none
-            type: gauge
+            name: Vlažnost DHT22
             grid_options:
               columns: 6
               rows: 3
           - entity: sensor.air_purifier_humidity
             max: 100
             min: 0
-            name: Vlažnost dnevne sobe
+            name: Vlažnost AP
             needle: true
             severity:
               green: 0
-              yellow: 0
-              red: 60
+              yellow: 60
+              red: 80
             tap_action:
               action: none
             type: gauge
             grid_options:
               columns: 6
               rows: 3
+          - type: heading
+            icon: mdi:fridge
+            heading: Spolja
+            heading_style: title
+          - entity: sensor.ct_esp8266_dht11_68b0d6_temperature
+            max: 50
+            min: 0
+            needle: true
+            severity:
+              green: 10
+              yellow: 30
+              red: 40
+            tap_action:
+              action: none
+            type: gauge
+            grid_options:
+              columns: 6
+              rows: 3
+            name: Temperatura DHT11
+          - entity: sensor.ct_esp8266_dht11_68b0d6_humidity
+            min: -20
+            needle: true
+            severity:
+              green: 0
+              yellow: 60
+              red: 80
+            tap_action:
+              action: none
+            type: gauge
+            max: 100
+            name: Vlažnost DHT11
+            grid_options:
+              columns: 6
+              rows: 3
       - type: grid
         cards:
-          - type: heading
-            heading: Termostat
-            heading_style: title
           - type: thermostat
-            entity: climate.ct_sensorset_283a40_thermostat
+            entity: climate.ct_sensorset_thermostat
+            features:
+              - type: climate-hvac-modes
+              - type: climate-preset-modes
+                style: dropdown
+            show_current_as_primary: true
             name: Termostat
+      - type: grid
+        cards: []
     cards: []
   - title: Plan
     path: floorplan
@@ -589,7 +513,102 @@ views:
       - type: grid
         cards:
           - type: heading
-            heading: New section
+            icon: mdi:window-open-variant
+            heading: Dnevna - balkon
+            heading_style: subtitle
+          - show_name: true
+            show_icon: true
+            type: button
+            name: Podignute
+            icon: mdi:arrow-up-bold
+            tap_action:
+              action: call-service
+              service: cover.open_cover
+              target:
+                entity_id: cover.ct_curtain_ctrl_cb2s_160fa2_curtains1
+            grid_options:
+              columns: 3
+              rows: 2
+          - type: button
+            name: Stop
+            icon: mdi:stop
+            tap_action:
+              action: call-service
+              service: cover.stop_cover
+              target:
+                entity_id: cover.ct_curtain_ctrl_cb2s_160fa2_curtains1
+          - show_name: true
+            show_icon: true
+            type: button
+            name: Spuštene
+            icon: mdi:arrow-down-bold
+            tap_action:
+              action: call-service
+              service: cover.close_cover
+              target:
+                entity_id: cover.ct_curtain_ctrl_cb2s_160fa2_curtains1
+            grid_options:
+              columns: 3
+              rows: 2
+          - type: heading
+            icon: mdi:window-closed
+            heading: Dnevna - veliki prozori
+            heading_style: subtitle
+          - show_name: true
+            show_icon: true
+            type: button
+            name: Podignute
+            icon: mdi:arrow-up-bold
+            tap_action:
+              action: perform-action
+              target:
+                entity_id: cover.ct_curtain_ctrl_cb2s_c9545a_curtains1
+              perform_action: cover.open_cover
+              data: {}
+            grid_options:
+              columns: 3
+              rows: 2
+          - show_name: true
+            show_icon: true
+            type: button
+            name: Stop
+            icon: mdi:stop
+            tap_action:
+              action: perform-action
+              target:
+                entity_id: cover.ct_curtain_ctrl_cb2s_c9545a_curtains1
+              perform_action: cover.stop_cover
+              data: {}
+          - show_name: true
+            show_icon: true
+            type: button
+            name: Spuštene
+            icon: mdi:arrow-down-bold
+            tap_action:
+              action: perform-action
+              target:
+                entity_id: cover.ct_curtain_ctrl_cb2s_c9545a_curtains1
+              perform_action: cover.close_cover
+              data: {}
+            grid_options:
+              columns: 3
+              rows: 2
+          - type: heading
+            icon: mdi:fridge
+            heading: Spavaća
+            heading_style: subtitle
+          - show_name: true
+            show_icon: true
+            type: button
+            tap_action:
+              action: toggle
+            grid_options:
+              columns: 12
+              rows: 2
+            show_state: false
+            icon: mdi:arrow-up-down-bold-outline
+            entity: switch.ct_relay_esp01_7a4041_relay1
+            name: Podignute / Spuštene
           - type: entities
             entities:
               - switch.ct_switch_one_relay_cb3s_bbdc1c_relay_1
@@ -599,53 +618,160 @@ views:
               - switch.ct_switch_one_relay_cb3s_bba7ca_relay_1
               - switch.ct_switch_one_relay_cb3s_bba661_relay_1
               - switch.ct_switch_one_relay_cb3s_bbecda_relay_1
+          - type: heading
+            heading: Pozadinsko
+            heading_style: subtitle
+            icon: mdi:light-flood-down
       - type: grid
         cards:
           - type: heading
-            heading: New section
-          - type: entities
-            entities:
-              - light.ct_switch_one_relay_cb3s_bbdc1c_backlight
-              - button.ct_switch_one_relay_cb3s_bbdc1c_backlight_toggle
-              - light.ct_switch_one_relay_cb3s_bba7af_backlight
-              - button.ct_switch_one_relay_cb3s_bba7af_backlight_toggle
-              - light.ct_switch_one_relay_cb3s_bbaf17_backlight
-              - button.ct_switch_one_relay_cb3s_bbaf17_backlight_toggle
-              - light.ct_switch_two_relay_cb3s_c02f20_backlight
-              - button.ct_switch_two_relay_cb3s_c02f20_backlight_toggle
-              - light.ct_switch_one_relay_cb3s_bba7ca_backlight
-              - button.ct_switch_one_relay_cb3s_bba7ca_backlight_toggle
-              - light.ct_switch_one_relay_cb3s_bba661_backlight
-              - button.ct_switch_one_relay_cb3s_bba661_backlight_toggle
-              - light.ct_switch_one_relay_cb3s_bbecda_backlight
-              - button.ct_switch_one_relay_cb3s_bbecda_backlight_toggle
-    title: Svetla
+            icon: mdi:theme-light-dark
+            heading_style: subtitle
+            heading: Jačina svetla
+          - type: gauge
+            entity: sensor.tasmota_tuyasns_illuminance
+            name: Spolja
+            max: 1000
+          - type: gauge
+            entity: sensor.air_purifier_illuminance
+            name: Unutra
+            max: 1000
+            min: 0
+          - type: heading
+            icon: mdi:ceiling-fan-light
+            heading_style: subtitle
+            heading: Svetla
+          - type: light
+            entity: light.yeelight_color_0x5eb7f5e
+          - type: tile
+            entity: switch.ct_switch_one_relay_cb3s_bbecda_relay_1
+            features_position: bottom
+            vertical: true
+            grid_options:
+              columns: 12
+              rows: 8
+    title: SVETLO
     cards: []
     type: sections
-    max_columns: 4
+    max_columns: 2
   - badges: []
     sections:
       - cards:
-          - heading: New section
+          - heading: Dnevna
             type: heading
+            heading_style: title
+            icon: mdi:webcam
           - cards:
-              - camera_view: auto
-                entity: camera.esp32cam_cam
+              - show_state: true
                 show_name: true
-                show_state: true
+                camera_view: auto
+                entity: camera.esp32cam_cam
                 type: picture-entity
+                name: Kamera u prolaznoj
+            columns: 1
+            square: false
+            type: grid
+          - cards:
+              - show_state: true
+                show_name: true
+                camera_view: auto
+                type: picture-entity
+                name: Kamera v2
+                camera_image: camera.ct_esp32_cam_s3_ba07c8_esp32_camera
+                entity: camera.ct_esp32_cam_s3_ba07c8_esp32_cam_s3
             columns: 1
             square: false
             type: grid
         type: grid
       - type: grid
         cards:
-          - type: heading
-            heading: New section
+          - heading: Spoljna
+            type: heading
+            heading_style: title
+            icon: mdi:webcam
+          - cards:
+              - show_state: true
+                show_name: true
+                camera_view: auto
+                entity: camera.ct_esp32_cam_c213e4_cam
+                type: picture-entity
+                name: Spolja
+            columns: 1
+            square: false
+            type: grid
     title: Kamere
     cards: []
     type: sections
     max_columns: 2
+  - type: sections
+    max_columns: 2
+    title: Sigurnost
+    path: sigurnost
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: Radar sensor
+            heading_style: title
+            icon: mdi:radar
+          - type: tile
+            entity: >-
+              sensor.seeedstudio_mr60bha2_kit_b4b928_distance_to_detection_object
+          - type: tile
+            entity: sensor.ct_60ghz_b4b928_number_of_targets
+            features_position: bottom
+            vertical: false
+          - type: tile
+            entity: light.seeedstudio_mr60bha2_kit_b4b928_seeed_mr60bha2_rgb_light
+    cards: []
+    header:
+      card:
+        type: markdown
+        content: |-
+          # Hello {{ user }}
+          Add your text here, template variables are supported ✨
+      layout: center
+      badges_position: bottom
+    badges:
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: person.cirko
+        name: Cirko
+        show_entity_picture: true
+        color: primary
+        state_content:
+          - state
+          - last_changed
+        tap_action:
+          action: more-info
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: person.aca
+        name: Cirko
+        show_entity_picture: true
+        color: primary
+        state_content:
+          - state
+          - last_changed
+        tap_action:
+          action: more-info
+      - type: entity
+        show_name: true
+        show_state: true
+        show_icon: true
+        entity: person.tanja
+        name: Cirko
+        show_entity_picture: true
+        color: primary
+        state_content:
+          - state
+          - last_changed
+        tap_action:
+          action: more-info
   - sections:
       - type: grid
         cards:
@@ -660,13 +786,67 @@ views:
               - sensor.air_purifier_humidity
               - sensor.air_purifier_pm2_5
               - sensor.air_purifier_temperature
-          - type: entities
-            entities:
-              - sensor.ct_sensorset_283a40_bme680_breath_voc_equivalent
-              - sensor.ct_sensorset_283a40_bme680_co2_equivalent
-              - sensor.ct_sensorset_283a40_bme680_gas_resistance
-              - sensor.ct_sensorset_283a40_bme680_iaq_accuracy
+      - type: grid
+        cards:
+          - type: heading
+            heading_style: title
+            icon: mdi:radar
+            heading: 60GHz radar
+          - type: gauge
+            name: Heart rate
+            min: 0
+            max: 200
+            severity:
+              green: 120
+              yellow: 150
+              red: 180
+            entity: sensor.ct_60ghz_b4b928_heart_rate
+            unit: bpm
+          - type: gauge
+            entity: sensor.ct_60ghz_b4b928_respiratory_rate
+            name: Breathing
+            min: 0
+            max: 100
+            needle: true
+            severity:
+              green: 0
+              yellow: 50
+              red: 80
+            unit: bpm
+          - type: tile
+            entity: >-
+              sensor.seeedstudio_mr60bha2_kit_b4b928_distance_to_detection_object
+            features_position: bottom
+            vertical: false
+            name: Distance
+          - type: tile
+            entity: sensor.ct_60ghz_b4b928_seeed_mr60bha2_illuminance
+            features_position: bottom
+            vertical: false
+            name: Illuminance
+            icon: mdi:sun-wireless
+          - type: tile
+            entity: light.seeedstudio_mr60bha2_kit_b4b928_seeed_mr60bha2_rgb_light
+          - type: tile
+            entity: sensor.ct_60ghz_b4b928_number_of_targets
+            features_position: bottom
+            vertical: false
+            name: Targets
+            icon: mdi:target
+          - type: tile
+            entity: binary_sensor.ct_60ghz_b4b928_has_target
     title: Zdravlje
     cards: []
     type: sections
     max_columns: 2
+  - type: sections
+    max_columns: 2
+    title: Setovanja
+    path: podesavanja
+    icon: ''
+    sections:
+      - type: grid
+        cards:
+          - type: heading
+            heading: New section
+    cards: []
